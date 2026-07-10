@@ -49,10 +49,22 @@
   font-size: var(--step-4);
   font-weight: 600;
   line-height: 0.95;
-  background: linear-gradient(120deg, var(--rose-deep) 0%, var(--rose) 40%, var(--gold) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  letter-spacing: -0.02em;
+  color: var(--rose-deep);
+}
+.landing__name .ch {
+  display: inline-block;
+  opacity: 0;
+  animation: name-rise 0.8s var(--ease) forwards;
+}
+/* Handwriting accent on the opening eyebrow only (warmth up front). */
+#landing .eyebrow {
+  font-family: var(--font-hand);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: var(--step-1);
+  font-weight: 500;
+  color: var(--rose-deep);
 }
 .landing__message { max-width: 28ch; margin: 0.4em auto 2em; }
 #landing .btn { margin-top: 0.3em; }
@@ -104,9 +116,9 @@
   border-radius: 12px 12px 8px 8px;
   box-shadow: inset 0 -8px 0 rgba(0,0,0,0.05), var(--shadow-soft);
 }
-.cake__tier--top  { width: 120px; height: 44px; background: linear-gradient(var(--rose-pale), var(--rose)); z-index: 3; }
-.cake__tier--mid  { width: 175px; height: 56px; background: linear-gradient(var(--lavender-pale), var(--lavender)); margin-top: -6px; z-index: 2; }
-.cake__tier--base { width: 220px; height: 64px; background: linear-gradient(#fff, var(--cream-deep)); margin-top: -6px; z-index: 1; }
+.cake__tier--top  { width: 120px; height: 44px; background: linear-gradient(100deg, var(--rose) 0%, var(--rose-pale) 45%, var(--rose) 100%); z-index: 3; }
+.cake__tier--mid  { width: 175px; height: 56px; background: linear-gradient(100deg, var(--lavender) 0%, var(--lavender-pale) 45%, var(--lavender) 100%); margin-top: -6px; z-index: 2; }
+.cake__tier--base { width: 220px; height: 64px; background: linear-gradient(100deg, var(--cream-deep) 0%, #ffffff 45%, var(--cream-deep) 100%); margin-top: -6px; z-index: 1; }
 /* icing drips */
 .cake__tier--top::after,
 .cake__tier--mid::after {
@@ -186,6 +198,8 @@
 .balloon.b3 { left: 88%; top: 40%; background: var(--gold-soft);--b-rot: -3deg; animation-delay: -0.6s; }
 .balloon.b4 { left: -2%; top: 44%; background: var(--lavender); --b-rot: 4deg;  animation-delay: -1.8s; }
 .balloon.b5 { left: 40%; top: -4%; background: var(--rose-pale);--b-rot: -6deg; animation-delay: -2.4s; }
+.balloon.popped { animation: heart-pop 0.35s var(--ease) forwards; }
+.balloon.popped::after { opacity: 0; }
 
 #chapter-birthday .btn { margin-top: 1.4em; }
 
@@ -215,16 +229,24 @@
   overflow: hidden;
   box-shadow: var(--shadow-lift);
   aspect-ratio: 4 / 5;
+  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
 }
 .tl-card__media img { width: 100%; height: 100%; object-fit: cover; }
-.tl-card__body { padding: var(--space-md); }
+.tl-card:hover .tl-card__media { transform: translateY(-4px) scale(1.012); box-shadow: 0 40px 90px -34px rgba(59,50,54,0.55); }
+.tl-card__body {
+  padding: var(--space-md);
+  background: var(--cream-deep);
+  border: 1px solid rgba(190, 155, 78, 0.18);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
 .tl-card__date {
   font-family: var(--font-body);
   font-size: var(--step--1);
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-text);
   margin-bottom: 0.4em;
 }
 .tl-card__title { font-size: var(--step-2); margin-bottom: 0.35em; }
@@ -232,12 +254,12 @@
 .tl-card__dot {
   position: absolute;
   left: 50%; top: 50%;
-  width: 16px; height: 16px;
-  transform: translate(-50%, -50%) rotate(45deg);
+  width: 20px; height: 20px;
+  transform: translate(-50%, -50%);
   background: var(--gold);
-  border: 3px solid var(--cream);
-  border-radius: 4px 4px 4px 10px;
-  box-shadow: 0 0 0 4px rgba(190,155,78,0.18);
+  -webkit-mask: var(--heart-mask) center / contain no-repeat;
+  mask: var(--heart-mask) center / contain no-repeat;
+  filter: drop-shadow(0 1px 2px rgba(190,155,78,0.5));
   z-index: 2;
 }
 
@@ -268,7 +290,7 @@
   background: linear-gradient(135deg, var(--rose), var(--rose-deep));
   flex: none;
 }
-.track__index { font-family: var(--font-display); color: var(--gold); font-size: var(--step-1); }
+.track__index { font-family: var(--font-display); color: var(--gold-text); font-size: var(--step-1); }
 .track__meta { display: flex; flex-direction: column; min-width: 0; }
 .track__title { font-weight: 600; }
 .track__artist { font-size: var(--step--1); color: var(--ink-soft); }
@@ -307,10 +329,10 @@
 .mp__controls { display: flex; align-items: center; gap: 0.2rem; }
 .mp__vol { display: flex; align-items: center; gap: 0.4rem; color: var(--ink-soft); }
 .mp__vol input[type="range"] { width: 84px; accent-color: var(--rose); }
-.mp__toggle { display: none; }
+/* Toggle stays visible in both states so the player can always be re-collapsed. */
+.mp__toggle { display: grid; }
 #mini-player[data-collapsed="true"] .mp__meta,
 #mini-player[data-collapsed="true"] .mp__vol { display: none; }
-#mini-player[data-collapsed="true"] .mp__toggle { display: grid; }
 
 /* ========================== CH.4 LOVE LETTER ========================== */
 .letter-stage {
@@ -366,16 +388,22 @@
   position: absolute;
   left: 50%; top: 54%;
   transform: translate(-50%, -50%);
-  width: 52px; height: 52px;
+  width: 54px; height: 54px;
   z-index: 5;
   display: grid; place-items: center;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, var(--gold-soft), var(--gold) 70%, #8f7124 100%);
-  color: #fff8e6;
+  /* irregular poured-wax edge */
+  border-radius: 48% 52% 47% 53% / 51% 47% 53% 49%;
+  background: radial-gradient(circle at 34% 28%, var(--gold-soft), var(--gold) 68%, #8f7124 100%);
+  color: #6f5518;
   font-family: var(--font-display);
-  font-size: 1.4rem;
-  box-shadow: 0 6px 14px -4px rgba(120,90,20,0.7), inset 0 0 0 2px rgba(255,255,255,0.25);
+  font-size: 1.5rem;
+  font-weight: 600;
+  filter: drop-shadow(0 3px 4px rgba(120,90,20,0.55));
+  box-shadow: 0 6px 14px -4px rgba(120,90,20,0.7), inset 0 0 0 2px rgba(255,255,255,0.22), inset 0 -3px 6px rgba(0,0,0,0.28);
   transition: transform 0.5s var(--ease), opacity 0.4s var(--ease);
+}
+.envelope__seal span {
+  text-shadow: 0 1px 0 rgba(255,255,255,0.35), 0 -1px 1px rgba(0,0,0,0.4);
 }
 #envelope:hover .envelope__seal { transform: translate(-50%, -50%) scale(1.06); }
 #envelope.is-open { transform: translateY(20px); }
@@ -443,6 +471,7 @@
 #chapter-final .section__inner { position: relative; z-index: 1; }
 
 .final-intro { transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.final__lede { color: var(--ink-soft); max-width: 32ch; margin: 0.4em auto 1.2em; }
 .final__prompt {
   font-family: var(--font-display);
   font-size: var(--step-2);
@@ -499,6 +528,53 @@
   text-shadow: 0 2px 20px rgba(0,0,0,0.4);
 }
 .final-message p:last-child { font-size: var(--step-2); color: #fff; }
+
+/* ========================= EASTER EGGS / SECRETS ====================== */
+.hidden-heart {
+  position: absolute;
+  z-index: 55;
+  width: 22px; height: 22px;
+  padding: 0;
+  color: var(--rose);
+  opacity: 0.3;
+  cursor: pointer;
+  animation: egg-twinkle 3.6s ease-in-out infinite;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.hidden-heart svg { width: 100%; height: 100%; display: block; }
+.hidden-heart:hover { opacity: 0.95; transform: scale(1.3); }
+.hidden-heart:focus-visible { opacity: 1; }
+.hidden-heart.found { animation: heart-pop 0.5s var(--ease) forwards; }
+
+#secret-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: rgba(43, 36, 40, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease);
+}
+#secret-overlay.show { opacity: 1; pointer-events: auto; }
+.secret-card {
+  position: relative;
+  max-width: min(92vw, 460px);
+  padding: clamp(1.8rem, 5vw, 2.8rem);
+  text-align: center;
+  transform: translateY(16px) scale(0.97);
+  transition: transform 0.5s var(--ease);
+}
+#secret-overlay.show .secret-card { transform: none; }
+.secret-card__spark { font-size: 1.7rem; color: var(--gold); }
+.secret-card__title { font-size: var(--step-2); margin: 0.3em 0 0.5em; }
+.secret-card__msg { color: var(--ink-soft); margin-bottom: 1.6em; }
+.secret-card__close { margin: 0 auto; }
+.heart--rain { animation-name: heart-float; }
 
 /* ============================== RESPONSIVE ============================= */
 @media (max-width: 760px) {

@@ -72,7 +72,12 @@
         built.push(li);
       });
       if (window.staggerReveal) window.staggerReveal(built, 0.06);
+      // Tracks are built after initReveal wired the observer, so register them now.
+      if (window.revealObserve) window.revealObserve(built);
     }
+
+    // Seed the global volume once so loudness is driven from a single control.
+    try { if (window.Howler && volEl) window.Howler.volume(volEl.value / 100); } catch (e) {}
 
     /* --- Howl management (lazy, guarded) --- */
     function getHowl(i) {
@@ -82,7 +87,9 @@
         var h = new window.Howl({
           src: [list[i].src],
           html5: true,
-          volume: volEl ? volEl.value / 100 : 0.7,
+          // Per-howl volume stays at 1; loudness is driven by the global
+          // Howler.volume() so the slider isn't applied twice.
+          volume: 1,
           onend: function () { next(); },
           onloaderror: function () {},
           onplayerror: function () {},

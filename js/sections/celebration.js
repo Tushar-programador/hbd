@@ -158,23 +158,63 @@
     start();
   };
 
+  // A small localized burst at screen coordinates (used by balloon pops, eggs).
+  window.firePop = function (x, y) {
+    if (!ensureCanvas()) return;
+    if (window.REDUCED) { staticBurst(); return; }
+    var count = 16;
+    for (var i = 0; i < count; i++) {
+      var ang = rand(0, Math.PI * 2), spd = rand(1.4, 4);
+      particles.push({
+        type: "spark",
+        x: x, y: y,
+        vx: Math.cos(ang) * spd, vy: Math.sin(ang) * spd,
+        color: pick(COLORS), size: rand(2, 3.4),
+        life: 1, decay: rand(0.02, 0.032),
+      });
+    }
+    endTime = Math.max(endTime, now() + 900);
+    start();
+  };
+
   window.initCelebration = function () {
     ensureCanvas();
     var cake = document.getElementById("cake");
     if (!cake) return;
     var done = false;
-    function blow() {
-      if (done) return;
-      done = true;
-      cake.classList.add("is-blown");
-      cake.setAttribute("aria-label", "The candle is out. Happy birthday!");
-      if (window.AudioBus) window.AudioBus.play("confetti");
-      window.fireConfetti(2600);
-      window.fireFireworks(2800);
+
+    function onCake() {
+      if (!done) {
+        done = true;
+        cake.classList.add("is-blown");
+        cake.setAttribute("aria-label", "The candle is out. Happy birthday! Tap again for one more wish.");
+        if (window.AudioBus) window.AudioBus.play("confetti");
+        window.fireConfetti(2600);
+        window.fireFireworks(2800);
+      } else {
+        // Easter egg: keep tapping for more wishes.
+        if (window.AudioBus) window.AudioBus.play("confetti");
+        window.fireConfetti(1400);
+      }
     }
-    cake.addEventListener("click", blow);
+
+    cake.addEventListener("click", onCake);
     cake.addEventListener("keydown", function (e) {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); blow(); }
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onCake(); }
+    });
+
+    // Pop the balloons for a little burst of joy.
+    var balloons = document.querySelectorAll("#chapter-birthday .balloon");
+    Array.prototype.forEach.call(balloons, function (b) {
+      b.style.pointerEvents = "auto";
+      b.style.cursor = "pointer";
+      b.addEventListener("click", function () {
+        if (b.classList.contains("popped")) return;
+        var r = b.getBoundingClientRect();
+        window.firePop(r.left + r.width / 2, r.top + r.height / 2);
+        b.classList.add("popped");
+        if (window.AudioBus) window.AudioBus.play("pop");
+      });
     });
   };
 })();

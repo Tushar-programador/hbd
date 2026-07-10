@@ -128,4 +128,25 @@ window.CONTENT = {
       "Thank you for being you.\n\n" +
       "I love you. ❤️",
   },
+
+  /* --- Hidden surprises (easter eggs) ------------------------------------ */
+  // Little secrets tucked around the site. All optional to change.
+  easterEggs: {
+    // How many hidden hearts are scattered across the chapters to find.
+    hiddenHeartCount: 5,
+    // Toast shown each time she finds one.
+    heartFoundToast: "You found a hidden heart",
+    // Shown when all hidden hearts are found.
+    allFoundTitle: "You found them all",
+    allFoundMessage:
+      "[A tiny secret, just for you: you have a way of finding the good in everything — " +
+      "even hidden hearts. That's one of a hundred reasons I adore you.]",
+    // Secret when she types her own name anywhere.
+    nameSecret: "You typed your name. Funny — I think about it all the time too. 💕",
+    // Secret for the classic up-up-down-down… code.
+    konamiSecret: "Unlocked: extra fireworks, just because you deserve more of everything.",
+    // Whisper when she taps the wax seal a few times before opening it.
+    sealWhisper: "Patience… the best things are worth opening slowly. 💌",
+    closeLabel: "Close",
+  },
 };

@@ -62,5 +62,19 @@
     env.addEventListener("keydown", function (e) {
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
     });
+
+    // Easter egg: lingering on the wax seal (without opening) earns a whisper.
+    var seal = env.querySelector(".envelope__seal");
+    if (seal) {
+      var dwell = null;
+      seal.addEventListener("mouseenter", function () {
+        if (opened) return;
+        dwell = window.setTimeout(function () {
+          var eggs = (window.CONTENT && window.CONTENT.easterEggs) || {};
+          if (!opened && window.showEggToast && eggs.sealWhisper) window.showEggToast(eggs.sealWhisper);
+        }, 900);
+      });
+      seal.addEventListener("mouseleave", function () { if (dwell) window.clearTimeout(dwell); });
+    }
   };
 })();

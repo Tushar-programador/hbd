@@ -74,6 +74,27 @@
 
 @keyframes caret-blink { 50% { opacity: 0; } }
 
+@keyframes sparkle-fade {
+  from { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+  to   { opacity: 0; transform: translate(calc(-50% + var(--sx, 0px)), calc(-50% + var(--sy, 16px))) scale(0.3) rotate(40deg); }
+}
+
+@keyframes name-rise {
+  from { opacity: 0; transform: translateY(0.5em) rotate(4deg); filter: blur(4px); }
+  to   { opacity: 1; transform: none; filter: blur(0); }
+}
+
+@keyframes egg-twinkle {
+  0%, 100% { opacity: 0.28; transform: scale(0.9); }
+  50%      { opacity: 0.6;  transform: scale(1.08); }
+}
+
+@keyframes heart-pop {
+  0%   { transform: scale(1); opacity: 1; }
+  50%  { transform: scale(1.6); opacity: 1; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
 /* Utility animation hooks (applied by CSS/JS) */
 .animate-gradient {
   background-size: 220% 220%;

@@ -71,21 +71,29 @@
   /* ---------------------------------------------------------------------- */
   /* Scroll reveal                                                          */
   /* ---------------------------------------------------------------------- */
+  var _revealIO = null;
   function initReveal() {
-    var items = document.querySelectorAll("[data-reveal]");
     if (REDUCED || !("IntersectionObserver" in window)) {
-      items.forEach(function (el) { el.classList.add("is-visible"); });
+      // No observer: expose a helper that just shows nodes immediately.
+      window.revealObserve = function (nodes) {
+        (nodes || []).forEach(function (el) { el.classList.add("is-visible"); });
+      };
+      window.revealObserve(document.querySelectorAll("[data-reveal]"));
       return;
     }
-    var io = new IntersectionObserver(function (entries) {
+    _revealIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add("is-visible");
-          io.unobserve(entry.target);
+          _revealIO.unobserve(entry.target);
         }
       });
     }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
-    items.forEach(function (el) { io.observe(el); });
+    // Observe any node(s); modules that build [data-reveal] content later call this.
+    window.revealObserve = function (nodes) {
+      (nodes || []).forEach(function (el) { _revealIO.observe(el); });
+    };
+    window.revealObserve(document.querySelectorAll("[data-reveal]"));
   }
 
   /* Stagger reveal children within a container (used by timeline/playlist). */
@@ -129,6 +137,16 @@
         else n.classList.remove("is-reached");
       });
     }
+
+    // Make each heart node a shortcut to its chapter.
+    var nodeTitles = ["The start", "Happy Birthday", "The Beginning", "Our music", "Your letter", "One last thing"];
+    nodes.forEach(function (n, i) {
+      n.setAttribute("title", nodeTitles[i] || "Chapter " + (i + 1));
+      n.addEventListener("click", function () {
+        var s = document.getElementById(SECTION_IDS[i]);
+        if (s) s.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" });
+      });
+    });
 
     layoutNodes();
     update();
@@ -180,9 +198,11 @@
     var btn = document.getElementById("mute-toggle");
     if (!btn) return;
     function sync() {
+      // Stable name describes what the control is; aria-pressed carries state.
       var muted = AudioBus.muted;
       btn.setAttribute("aria-pressed", String(muted));
-      btn.setAttribute("aria-label", muted ? "Turn sound on" : "Turn sound off");
+      btn.setAttribute("aria-label", "Mute");
+      btn.setAttribute("title", muted ? "Sound off — tap to turn on" : "Sound on — tap to mute");
     }
     sync();
     window.syncMuteUI = sync; // let modules refresh the button after changing mute
@@ -227,7 +247,7 @@
 
     // Landing
     setText("landing-title", C.landingTitle);
-    setText("landing-name", C.recipientName);
+    buildAnimatedName(C.recipientName);
     setText("landing-message", C.landingMessage);
     setText("begin-journey", C.beginButton);
 
@@ -265,6 +285,7 @@
     // Chapter 5 — Final Surprise (header + prompt + button)
     if (C.final) {
       setText("final-eyebrow", C.final.eyebrow);
+      setText("final-lede", C.final.intro);
       setText("final-prompt", C.final.prompt);
       setText("final-gift-btn", C.final.button);
     }
@@ -272,6 +293,25 @@
     // Update the seal initial + document title with the real name.
     var seal = document.querySelector("#envelope .envelope__seal span");
     if (seal && C.recipientName) seal.textContent = C.recipientName.charAt(0).toUpperCase();
+  }
+
+  // Landing name — reveal each letter with a gentle staggered rise.
+  function buildAnimatedName(name) {
+    var el = document.getElementById("landing-name");
+    if (!el) return;
+    name = name || "";
+    if (REDUCED) { el.textContent = name; return; }
+    el.textContent = "";
+    el.setAttribute("aria-label", name);
+    for (var i = 0; i < name.length; i++) {
+      var ch = name.charAt(i);
+      var span = document.createElement("span");
+      span.className = "ch";
+      span.setAttribute("aria-hidden", "true");
+      span.textContent = ch === " " ? " " : ch;
+      span.style.animationDelay = (0.5 + i * 0.08) + "s";
+      el.appendChild(span);
+    }
   }
 
   function buildTimeline(cards) {
@@ -293,7 +333,7 @@
       media.appendChild(img);
 
       var body = document.createElement("div");
-      body.className = "tl-card__body glass";
+      body.className = "tl-card__body";
       var date = document.createElement("p");
       date.className = "tl-card__date";
       date.textContent = card.date || "";
@@ -345,6 +385,10 @@
     if (typeof window.initLoveLetter === "function") window.initLoveLetter();
     if (typeof window.initMusicPlayer === "function") window.initMusicPlayer();
     if (typeof window.initFinalSurprise === "function") window.initFinalSurprise();
+
+    // Delight layers
+    if (typeof window.initSparkle === "function") window.initSparkle();
+    if (typeof window.initEasterEggs === "function") window.initEasterEggs();
   }
 
   if (document.readyState === "loading") {
