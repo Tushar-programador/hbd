@@ -1,0 +1,97 @@
+/* ============================================================================
+   animations.css — keyframes, scroll-reveal states, reduced-motion overrides
+   ========================================================================== */
+
+/* --- Scroll reveal --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s var(--ease),
+    transform 0.9s var(--ease);
+  transition-delay: var(--reveal-delay, 0s);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Variants */
+.reveal--left  { transform: translateX(-40px); }
+.reveal--right { transform: translateX(40px); }
+.reveal--scale { transform: scale(0.92); }
+.reveal--left.is-visible,
+.reveal--right.is-visible,
+.reveal--scale.is-visible { transform: none; }
+
+/* --- Keyframes --- */
+@keyframes heart-float {
+  0%   { transform: translateY(0) translateX(0) rotate(0deg) scale(var(--h-scale, 1)); opacity: 0; }
+  10%  { opacity: var(--h-opacity, 0.5); }
+  90%  { opacity: var(--h-opacity, 0.5); }
+  100% { transform: translateY(-118vh) translateX(var(--h-drift, 20px)) rotate(20deg) scale(var(--h-scale, 1)); opacity: 0; }
+}
+
+@keyframes gradient-drift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes flame-flicker {
+  0%, 100% { transform: translateX(-50%) scaleY(1) scaleX(1);  opacity: 1; }
+  25%      { transform: translateX(-52%) scaleY(1.12) scaleX(0.94); opacity: 0.92; }
+  50%      { transform: translateX(-48%) scaleY(0.92) scaleX(1.06); opacity: 1; }
+  75%      { transform: translateX(-51%) scaleY(1.06) scaleX(0.97); opacity: 0.95; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.55; }
+  50%      { transform: translateX(-50%) scale(1.25); opacity: 0.8; }
+}
+
+@keyframes balloon-bob {
+  0%   { transform: translateY(0) rotate(var(--b-rot, -3deg)); }
+  50%  { transform: translateY(-16px) rotate(calc(var(--b-rot, -3deg) * -1)); }
+  100% { transform: translateY(0) rotate(var(--b-rot, -3deg)); }
+}
+
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 16px 34px -14px rgba(201,108,128,0.8), 0 0 0 0 rgba(228,137,155,0.5); }
+  70%  { box-shadow: 0 16px 34px -14px rgba(201,108,128,0.8), 0 0 0 22px rgba(228,137,155,0); }
+  100% { box-shadow: 0 16px 34px -14px rgba(201,108,128,0.8), 0 0 0 0 rgba(228,137,155,0); }
+}
+
+@keyframes ken-burns {
+  0%   { transform: scale(1.02) translate(0, 0); }
+  100% { transform: scale(1.16) translate(-1.5%, -1.5%); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes caret-blink { 50% { opacity: 0; } }
+
+/* Utility animation hooks (applied by CSS/JS) */
+.animate-gradient {
+  background-size: 220% 220%;
+  animation: gradient-drift 18s ease-in-out infinite;
+}
+.pulse { animation: pulse-ring 2.6s var(--ease) infinite; }
+
+/* ============================================================================
+   Reduced motion — honor the user's system preference
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  #hearts-layer { display: none; }
+  .animate-gradient { animation: none; background-position: 50% 50%; }
+}
