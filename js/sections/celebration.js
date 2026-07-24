@@ -182,6 +182,15 @@
     var cake = document.getElementById("cake");
     if (!cake) return;
     var done = false;
+    var videoWrap = document.getElementById("cake-video");
+    var videoEl = document.getElementById("cake-video-el");
+
+    function revealVideo() {
+      if (!videoWrap || !videoEl) return;
+      videoWrap.classList.add("is-visible");
+      videoWrap.removeAttribute("aria-hidden");
+      videoEl.play && videoEl.play().catch(function () { /* autoplay may be blocked; controls still work */ });
+    }
 
     function onCake() {
       if (!done) {
@@ -191,6 +200,7 @@
         if (window.AudioBus) window.AudioBus.play("confetti");
         window.fireConfetti(2600);
         window.fireFireworks(2800);
+        revealVideo();
       } else {
         // Easter egg: keep tapping for more wishes.
         if (window.AudioBus) window.AudioBus.play("confetti");

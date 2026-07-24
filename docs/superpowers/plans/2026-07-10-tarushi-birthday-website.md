@@ -1,8 +1,8 @@
-# Varsha Birthday Website — Round 1 MVP Implementation Plan
+# Tarushi Birthday Website — Round 1 MVP Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build the six-chapter emotional spine of a cinematic, mobile-first birthday website for Varsha as a zero-build static site.
+**Goal:** Build the six-chapter emotional spine of a cinematic, mobile-first birthday website for Tarushi as a zero-build static site.
 
 **Architecture:** Single-page vertical scroll. One `index.html` stacks all Round 1 sections. Global systems (scroll-reveal, floating hearts, progress bar, mute, reduced-motion, keyboard nav) live in `js/main.js`. Each interactive chapter gets a focused module in `js/sections/`. All personal content lives in one `content.js` object (`window.CONTENT`) so personalization never touches markup or logic. GSAP + Howler.js load from CDN.
 
@@ -12,7 +12,7 @@
 
 - **No build step.** Site must run by opening `index.html` directly (`file://`) or via any static server. No npm/Node dependency.
 - **No git commits.** Per user instruction, do not run `git add`/`git commit` at any point.
-- **Recipient name:** "Varsha" — always sourced from `CONTENT.recipientName`, never hardcoded in markup.
+- **Recipient name:** "Tarushi" — always sourced from `CONTENT.recipientName`, never hardcoded in markup.
 - **Palette (CSS custom properties in `base.css`):** `--pink` soft pink, `--lavender`, `--gold` accent, `--warm-white` / `--cream` backgrounds, `--text` dark gray.
 - **Typography:** elegant serif for headings, modern sans-serif for body. Use system-safe stacks + optional Google Fonts `<link>` (site must still look correct if fonts fail to load).
 - **Mobile-portrait first**, responsive up to desktop/tablet.
@@ -70,7 +70,7 @@ Load order in `index.html` (end of `<body>`): CDN (GSAP, Howler) → `content.js
 - Produces: `window.CONTENT` object with keys `recipientName`, `landingMessage`, `beginningCards[]` (`{title,text,imagePath,alt}`), `loveLetter` (`{body,signature}`), `playlist[]` (`{title,artist,src}`), `finalPhotos[]` (`{imagePath,alt}`), `finalMessage` (string with `\n` line breaks). Every later task reads from this.
 - Produces: `index.html` with `<section>` elements having ids `landing`, `chapter-birthday`, `chapter-beginning`, `chapter-letter`, `chapter-music`, `chapter-final`; a `#progress-bar` element; a `#mute-toggle` button; a `#hearts-layer` div.
 
-- [ ] **Step 1: Create `content.js`** with `window.CONTENT` populated with romantic placeholder copy — `recipientName: "Varsha"`, the exact `landingMessage` and `finalMessage` from Global Constraints, 5 `beginningCards`, a `loveLetter` with multi-paragraph placeholder body signed `"[Your Name]"`, 3 `playlist` entries pointing at `assets/music/song1.mp3` etc. (files need not exist yet), and 6 `finalPhotos` pointing at `assets/images/memory-1.svg`…`memory-6.svg`.
+- [ ] **Step 1: Create `content.js`** with `window.CONTENT` populated with romantic placeholder copy — `recipientName: "Tarushi"`, the exact `landingMessage` and `finalMessage` from Global Constraints, 5 `beginningCards`, a `loveLetter` with multi-paragraph placeholder body signed `"[Your Name]"`, 3 `playlist` entries pointing at `assets/music/song1.mp3` etc. (files need not exist yet), and 6 `finalPhotos` pointing at `assets/images/memory-1.svg`…`memory-6.svg`.
 
 - [ ] **Step 2: Create `assets/images/` placeholder SVGs** — write 6 simple inline-styled SVG files `memory-1.svg`…`memory-6.svg` (soft gradient rectangle with a centered heart and the memory number) so nothing renders broken. Also `beginning-1.svg`…`beginning-5.svg` referenced by `beginningCards`.
 
@@ -134,7 +134,7 @@ Load order in `index.html` (end of `<body>`): CDN (GSAP, Howler) → `content.js
 
 - [ ] **Step 3: `initLanding`** — set `h1` text using `CONTENT.recipientName`, set `p` text to `CONTENT.landingMessage`, add click handler on `#begin-journey` scrolling to `#chapter-birthday` (respect REDUCED for behavior).
 
-- [ ] **Step 4: Verify (browser)** — Expected: full-screen gradient, "Happy Birthday, Varsha" in serif, message line, pulsing button; clicking Begin Journey scrolls to Chapter 1.
+- [ ] **Step 4: Verify (browser)** — Expected: full-screen gradient, "Happy Birthday, Tarushi" in serif, message line, pulsing button; clicking Begin Journey scrolls to Chapter 1.
 
 ---
 

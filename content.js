@@ -16,7 +16,7 @@
 
 window.CONTENT = {
   /* --- Who this is for ---------------------------------------------------- */
-  recipientName: "Varsha",
+  recipientName: "Tarushi",
 
   /* --- Landing screen ---------------------------------------------------- */
   landingTitle: "Happy Birthday",
@@ -42,36 +42,36 @@ window.CONTENT = {
         date: "The day we met",
         title: "First Meeting",
         text: "[Write about the very first time you saw her — where you were, what she was wearing, the exact moment you knew this was going to matter.]",
-        imagePath: "assets/images/beginning-1.svg",
-        alt: "Placeholder photo of our first meeting",
+        imagePath: "assets/images/beginning-1.jpeg",
+        alt: "Photo of our first meeting",
       },
       {
         date: "The first hello",
         title: "First Conversation",
         text: "[What did you talk about for hours? What made you laugh? When did you realize you never wanted the conversation to end?]",
-        imagePath: "assets/images/beginning-2.svg",
-        alt: "Placeholder photo from our first conversation",
+        imagePath: "assets/images/beginning-2.jpeg",
+        alt: "Photo from our first conversation",
       },
       {
         date: "One for the memory",
         title: "First Picture",
         text: "[The first photo of us together. We had no idea how many more we'd take.]",
-        imagePath: "assets/images/beginning-3.svg",
-        alt: "Placeholder of the first picture of us",
+        imagePath: "assets/images/beginning-3.jpeg",
+        alt: "The first picture of us",
       },
       {
         date: "The one that stuck",
         title: "First Memory",
         text: "[The first moment that became a 'remember when' — the story you two still tell each other.]",
-        imagePath: "assets/images/beginning-4.svg",
-        alt: "Placeholder photo of our first memory",
+        imagePath: "assets/images/beginning-4.jpeg",
+        alt: "Photo of our first memory",
       },
       {
         date: "And then, us",
         title: "The Start of Everything",
         text: "[The moment 'you' and 'me' quietly became 'us'.]",
-        imagePath: "assets/images/beginning-5.svg",
-        alt: "Placeholder photo of the start of us",
+        imagePath: "assets/images/beginning-5.jpeg",
+        alt: "Photo of the start of us",
       },
     ],
   },
@@ -97,7 +97,7 @@ window.CONTENT = {
     sealHint: "Tap the seal to open",
     // Use blank lines to separate paragraphs. Write from the heart.
     body:
-      "My dearest Varsha,\n\n" +
+      "My dearest Tarushi,\n\n" +
       "[Start with how it feels to write this — a whole year of us behind these words.]\n\n" +
       "[Tell her the small things you notice. The way she laughs. The way a room changes when she walks in. The way she makes ordinary days feel like something worth remembering.]\n\n" +
       "[Tell her what she's given you. How she's changed you. What you're grateful for that you'll never say out loud enough.]\n\n" +
@@ -114,12 +114,11 @@ window.CONTENT = {
     button: "Open it",
     // Photos for the closing slideshow. Swap these for your favorites.
     photos: [
-      { imagePath: "assets/images/memory-1.svg", alt: "Placeholder memory one" },
-      { imagePath: "assets/images/memory-2.svg", alt: "Placeholder memory two" },
-      { imagePath: "assets/images/memory-3.svg", alt: "Placeholder memory three" },
-      { imagePath: "assets/images/memory-4.svg", alt: "Placeholder memory four" },
-      { imagePath: "assets/images/memory-5.svg", alt: "Placeholder memory five" },
-      { imagePath: "assets/images/memory-6.svg", alt: "Placeholder memory six" },
+      { imagePath: "assets/images/memory-1.jpeg", alt: "Memory one" },
+      { imagePath: "assets/images/memory-2.jpeg", alt: "Memory two" },
+      { imagePath: "assets/images/memory-3.jpeg", alt: "Memory three" },
+      { imagePath: "assets/images/memory-4.jpeg", alt: "Memory four" },
+      { imagePath: "assets/images/memory-5.jpeg", alt: "Memory five" },
     ],
     // The closing words. (Verbatim from the brief — change freely.)
     message:

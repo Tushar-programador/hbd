@@ -1,14 +1,14 @@
-# Varsha Birthday Website — Design Spec (MVP Round 1)
+# Tarushi Birthday Website — Design Spec (MVP Round 1)
 
 **Date:** 2026-07-10
 **Source:** `prd.md` ("For Her ❤️ — A Birthday Experience Built With Love")
-**Recipient:** Varsha
+**Recipient:** Tarushi
 
 ---
 
 ## 1. Purpose & Vision
 
-A digital love letter — a scrolling, cinematic birthday experience for Varsha. Not a
+A digital love letter — a scrolling, cinematic birthday experience for Tarushi. Not a
 tech demo; an emotional gift. Each section reveals slowly with smooth animation so the
 pacing feels heartfelt rather than rushed. Mobile-portrait first, elegant on desktop/tablet.
 
@@ -24,7 +24,7 @@ listed as deferred and will each get their own round using the same architecture
 Six chapters forming one complete, polished end-to-end flow:
 
 1. **Landing** — animated gradient background, floating hearts, soft music toggle,
-   "Happy Birthday, Varsha" title (elegant serif), the PRD message line
+   "Happy Birthday, Tarushi" title (elegant serif), the PRD message line
    ("Today is all about the most beautiful person in my life."), pulsing **Begin Journey** button.
 2. **Happy Birthday** — animated cake (click to blow out candle → triggers confetti + fireworks),
    floating balloons, CTA "Let's relive our journey."
@@ -108,7 +108,7 @@ HBD website/
 
 A single plain-JS object holding everything personal so the user edits one file, never markup/logic:
 
-- `recipientName` ("Varsha")
+- `recipientName` ("Tarushi")
 - `landingMessage`
 - `beginningCards[]` — { title, text, imagePath, alt }
 - `loveLetter` — { body text, signature }
@@ -169,5 +169,5 @@ Manual verification in-browser (mobile-portrait viewport primary):
 ## 9. Success Criteria
 
 Round 1 succeeds if the six-chapter spine feels personal, elegant, and emotionally paced —
-a complete, delightful flow Varsha can walk through end to end, ready for real photos and
+a complete, delightful flow Tarushi can walk through end to end, ready for real photos and
 stories to be dropped in, and ready to extend with the deferred chapters.
