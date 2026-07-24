@@ -41,35 +41,35 @@ window.CONTENT = {
       {
         date: "The day we met",
         title: "First Meeting",
-        text: "[Write about the very first time you saw her — where you were, what she was wearing, the exact moment you knew this was going to matter.]",
+        text: "I still remember the way that evening felt — like the room got a little warmer the moment you walked in. I didn't know your name yet, but I remember thinking I wanted to.",
         imagePath: "assets/images/beginning-1.jpeg",
         alt: "Photo of our first meeting",
       },
       {
         date: "The first hello",
         title: "First Conversation",
-        text: "[What did you talk about for hours? What made you laugh? When did you realize you never wanted the conversation to end?]",
+        text: "We talked for hours and it felt like minutes. I don't remember everything we said, but I remember laughing more than I had in a long time, and not wanting it to end.",
         imagePath: "assets/images/beginning-2.jpeg",
         alt: "Photo from our first conversation",
       },
       {
         date: "One for the memory",
         title: "First Picture",
-        text: "[The first photo of us together. We had no idea how many more we'd take.]",
+        text: "Our first photo together — we had no idea how many more we'd take after this one, or how many more nights out we'd steal just to make new memories.",
         imagePath: "assets/images/beginning-3.jpeg",
         alt: "The first picture of us",
       },
       {
         date: "The one that stuck",
         title: "First Memory",
-        text: "[The first moment that became a 'remember when' — the story you two still tell each other.]",
+        text: "This is the one we still bring up and laugh about — our own little 'remember when'. It's small, but it's ours, and that's what makes it matter.",
         imagePath: "assets/images/beginning-4.jpeg",
         alt: "Photo of our first memory",
       },
       {
         date: "And then, us",
         title: "The Start of Everything",
-        text: "[The moment 'you' and 'me' quietly became 'us'.]",
+        text: "Somewhere between all those firsts, 'you' and 'me' quietly became 'us' — and it's been the easiest, best thing I've ever fallen into.",
         imagePath: "assets/images/beginning-5.jpeg",
         alt: "Photo of the start of us",
       },
@@ -84,9 +84,10 @@ window.CONTENT = {
     // Drop real .mp3 files into assets/music/ and point `src` at them.
     // Until you do, the player still works — it just won't make sound.
     playlist: [
-      { title: "[Our Song]", artist: "[Artist]", src: "assets/music/song-1.mp3", note: "The one that always brings you back." },
-      { title: "[Song Two]", artist: "[Artist]", src: "assets/music/song-2.mp3", note: "For slow dancing in the kitchen." },
-      { title: "[Song Three]", artist: "[Artist]", src: "assets/music/song-3.mp3", note: "Because it makes you smile every time." },
+      { title: "Kesariya", artist: "Arijit Singh · Brahmāstra", src: "assets/music/song-1.mp3", note: "The one that always brings you back." },
+      { title: "Raataan Lambiyan", artist: "Tanishk Bagchi, Jubin Nautiyal, Asees Kaur · Shershaah", src: "assets/music/song-2.mp3", note: "For slow dancing when no one's watching." },
+      { title: "Tum Hi Ho", artist: "Arijit Singh · Aashiqui 2", src: "assets/music/song-3.mp3", note: "Because it still means every word." },
+      { title: "Kal Ho Naa Ho", artist: "Sonu Nigam · Wake Up Sid / KHNH", src: "assets/music/song-4.mp3", note: "A reminder to hold on to days like this one." },
     ],
   },
 
@@ -98,12 +99,13 @@ window.CONTENT = {
     // Use blank lines to separate paragraphs. Write from the heart.
     body:
       "My dearest Tarushi,\n\n" +
-      "[Start with how it feels to write this — a whole year of us behind these words.]\n\n" +
-      "[Tell her the small things you notice. The way she laughs. The way a room changes when she walks in. The way she makes ordinary days feel like something worth remembering.]\n\n" +
-      "[Tell her what she's given you. How she's changed you. What you're grateful for that you'll never say out loud enough.]\n\n" +
-      "[End with a promise — for this year, and every one after it.]",
+      "I've started writing this letter more times than I can count, because no version of it feels big enough for everything I actually want to say to you.\n\n" +
+      "I notice the small things about you more than you probably realize — the way you laugh with your whole face, the way a room feels different the second you walk into it, the way you can turn an ordinary Tuesday into something I still think about days later. You do that without even trying.\n\n" +
+      "You've given me more than I know how to put into words — patience when I didn't deserve it, comfort on the hard days, and a kind of happiness that sneaks up on me in the middle of the most ordinary moments. I don't say it enough, so I'm saying it here: thank you, for all of it, and for being exactly who you are.\n\n" +
+      "So here's my promise — for this year, and for every one after it: more silly arguments that end in laughing, more songs in the car, more nights that turn into mornings before we're ready, and me, choosing you, again and again.\n\n" +
+      "Happy Birthday, my love. Here's to us.",
     signoff: "All my love, always,",
-    signature: "[Your Name]",
+    signature: "Yours",
   },
 
   /* --- Chapter 5: Final Surprise ----------------------------------------- */
@@ -138,8 +140,8 @@ window.CONTENT = {
     // Shown when all hidden hearts are found.
     allFoundTitle: "You found them all",
     allFoundMessage:
-      "[A tiny secret, just for you: you have a way of finding the good in everything — " +
-      "even hidden hearts. That's one of a hundred reasons I adore you.]",
+      "A tiny secret, just for you: you have a way of finding the good in everything — " +
+      "even hidden hearts. That's one of a hundred reasons I adore you.",
     // Secret when she types her own name anywhere.
     nameSecret: "You typed your name. Funny — I think about it all the time too. 💕",
     // Secret for the classic up-up-down-down… code.
